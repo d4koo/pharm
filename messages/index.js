@@ -80,7 +80,7 @@ bot.dialog('/', [
       session.endDialog();
     }
     else{
-      builder.Prompts.text(session, results.response);
+      session.send(results.response);
     }
   },
   function(session, results){
