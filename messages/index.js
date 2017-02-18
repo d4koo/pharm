@@ -126,7 +126,6 @@ bot.dialog('/profile', [
     },
     function (session, results) {
         session.userData.name = results.response;
-        builder.Prompts.text()
         session.endDialog();
     }
 ]);
