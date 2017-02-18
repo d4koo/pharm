@@ -91,7 +91,7 @@ bot.dialog('/none', [
   },
   function(session,results){
     if(results.response.entity == "Yes please!"){
-      builder.Prompts.choice(session, "What is the closest address to you? (Try to be as detailed as possible)");
+      builder.Prompts.text(session, "What is the closest address to you? (Try to be as detailed as possible)");
     }
     else
       session.send(Dialog.endMessage);
