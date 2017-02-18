@@ -126,7 +126,8 @@ intents.onBegin(
     session.send(Dialog.endMessage);
   }
 );
-
+intents.matches('change_profile', '/profile');
+/*
 intents.matches('change_profile',[
     function (session) {
         builder.Prompts.text(session, 'Hi! What is your name?');
@@ -147,7 +148,7 @@ intents.matches('change_profile',[
         session.userData.gender = results.response.entity;
         session.endDialog();
     }
-])
+])*/
 
 intents.onDefault(builder.DialogAction.send("I'm sorry. I didn't understand."));
 
@@ -206,7 +207,7 @@ bot.dialog('/', [
     session.send(Dialog.endMessage);
   }
 ]);
-
+*/
 bot.dialog('/profile', [
     function (session) {
         builder.Prompts.text(session, 'Hi! What is your name?');
@@ -227,7 +228,7 @@ bot.dialog('/profile', [
         session.userData.gender = results.response.entity;
         session.endDialog();
     }
-]);*/
+]);
 
 /*bot.dialog('/', intents);  
 bot.dialog('/symptoms',[
