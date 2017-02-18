@@ -99,7 +99,7 @@ bot.dialog('/', [
 
 
 
-    session.send("Got it, so you're experiencing " +idSymptoms+".");
+    session.send("Got it, so you're experiencing " +Symp+".");
     session.send(Dialog.guessDiagnosis + symptoms);
     builder.Prompts.choice(session, Dialog.bestMeds + Dialog.medsList, ["Yes please!", "No thanks!"]);
   },
