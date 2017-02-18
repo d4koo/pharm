@@ -85,8 +85,16 @@ bot.dialog('/', [
   },
   function(session, results){
     session.sendTyping();
-    var symptoms = results.response;
-    session.send("Got it, so you're experiencing " +symptoms+".");
+    var symptoms = results.response.split();
+    var idSymptoms = [];
+    for(var i = 0; i <symptoms.length; i++){
+      for(var j = 0; j <Symp.length; j++){
+        if(Symp[j].name == symptoms[i])
+          idSymptoms.push(Symp[j].ID);
+      }
+    }
+
+    session.send("Got it, so you're experiencing " +idSymptoms+".");
     session.send(Dialog.guessDiagnosis + "GET DIAGNOSIS");
     builder.Prompts.choice(session, Dialog.bestMeds + Dialog.medsList, ["Yes please!", "No thanks!"]);
   },
