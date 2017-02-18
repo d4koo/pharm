@@ -6,7 +6,7 @@ http://docs.botframework.com/builder/node/guides/understanding-natural-language/
 -----------------------------------------------------------------------------*/
 "use strict";
 const Dialog = require('./dialog.js');
-const Symtpoms = require('./symtpoms.js');
+const Symp = require('./symptoms.js');
 var builder = require("botbuilder");
 var botbuilder_azure = require("botbuilder-azure");
 
@@ -90,7 +90,7 @@ bot.dialog('/', [
     var idSymptoms = [];
     for(var i = 0; i <symptoms.length; i++){
       for(var j = 0; j <Symp.length; j++){
-        if(Symp[j].name == symptoms[i])
+        if(Symp[j].Name == symptoms[i])
           idSymptoms.push(Symp[j].ID);
       }
     }
