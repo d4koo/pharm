@@ -86,7 +86,7 @@ bot.dialog('/', [
   },
   function(session, results){
     session.sendTyping();
-    var symptoms = results.response.replace(", ",",").split(",");
+    var symptoms = results.response.replace(", ","-").split("-");
     var idSymptoms = [];
 
     for(var i = 0; i <symptoms.length; i++){
