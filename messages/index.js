@@ -229,7 +229,8 @@ bot.dialog('/profile', [
     },
     function (session, results) {
         session.userData.gender = results.response.entity;
-        session.endDialog();
+        session.send('Profile complete.')
+        session.beginDialog('/none');
     }
 ]);
 
