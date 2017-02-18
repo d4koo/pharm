@@ -36,7 +36,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 .matches('<yourIntent>')... See details at http://docs.botframework.com/builder/node/guides/understanding-natural-language/
 */
 
-.matches('profile_change',[
+.matches('change_profile',[
   function(session){
     session.beginDialog('/profile');
   }
