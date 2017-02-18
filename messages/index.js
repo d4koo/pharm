@@ -5,6 +5,7 @@ For a complete walkthrough of creating this type of bot see the article at
 http://docs.botframework.com/builder/node/guides/understanding-natural-language/
 -----------------------------------------------------------------------------*/
 "use strict";
+const request = require('request');
 const Dialog = require('./dialog.js');
 const Symp = require('./symptoms.js');
 var builder = require("botbuilder");
@@ -35,11 +36,15 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 .matches('<yourIntent>')... See details at http://docs.botframework.com/builder/node/guides/understanding-natural-language/
 */
 
-.matches('change_profile',[
+/*.matches('feeling_flow',[
   function(session){
-    session.beginDialog('/profile');
+    builder.Prompts.choice(session, Dialog.entryMessage, ["Good", "Sick"]);
   },
-])
+  function(session, results){
+    session.userData.feeling = results.response.entity;
+    session.beginDialog('/symptoms');
+  }
+])*/
 
 /* .onDefault(
   function(session){
@@ -68,7 +73,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 ); */
 bot.dialog('/', [
   function (session, args, next) {
-      if (!session.userData.gender) {
+      if (!session.userData.name) {
           session.beginDialog('/profile');
       } else {
           next();
@@ -100,6 +105,15 @@ bot.dialog('/', [
         }
       }
     }
+
+    // Get request using idSymptoms[0] and idSymptoms[1] for diagnosis.
+    // Then GET diagnosis Issue["Name"] 
+    request('https://sandbox-healthservice.priaid.ch/diagnosis?symptoms=[\"13\"]&gender=male&year_of_birth=1988&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImRvbmFsZGtvbzcyQGdtYWlsLmNvbSIsInJvbGUiOiJVc2VyIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvc2lkIjoiMTE4OCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvdmVyc2lvbiI6IjIwMCIsImh0dHA6Ly9leGFtcGxlLm9yZy9jbGFpbXMvbGltaXQiOiI5OTk5OTk5OTkiLCJodHRwOi8vZXhhbXBsZS5vcmcvY2xhaW1zL21lbWJlcnNoaXAiOiJQcmVtaXVtIiwiaHR0cDovL2V4YW1wbGUub3JnL2NsYWltcy9sYW5ndWFnZSI6ImVuLWdiIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9leHBpcmF0aW9uIjoiMjA5OS0xMi0zMSIsImh0dHA6Ly9leGFtcGxlLm9yZy9jbGFpbXMvbWVtYmVyc2hpcHN0YXJ0IjoiMjAxNy0wMi0xOCIsImlzcyI6Imh0dHBzOi8vc2FuZGJveC1hdXRoc2VydmljZS5wcmlhaWQuY2giLCJhdWQiOiJodHRwczovL2hlYWx0aHNlcnZpY2UucHJpYWlkLmNoIiwiZXhwIjoxNDg3NDU2MDMyLCJuYmYiOjE0ODc0NDg4MzJ9.7Z1BSjILmw-kn4EROR4pdcTaEShdgVXvcBJ3PCY2JxI&language=en-gb&format=json', function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        console.log(body) // Show the HTML for the Google homepage. 
+      }
+    })
+
     session.send("Got it, so you're experiencing " +symptoms+".");
     session.send(Dialog.guessDiagnosis + idSymptoms);
     builder.Prompts.choice(session, Dialog.bestMeds + Dialog.medsList, ["Yes please!", "No thanks!"]);
@@ -118,16 +132,6 @@ bot.dialog('/profile', [
     },
     function (session, results) {
         session.userData.name = results.response;
-        builder.Prompts.choice(session, 'Select your gender', ["Male", "Female", "Other"]);
-    },
-    function (session, results)
-    {
-        session.userData.gender = results.response.entity;
-        builder.Prompts.text(session, 'What year were you born?');
-    },
-    function (session, results)
-    {
-        session.userData.birthYear = results.response;
         session.endDialog();
     }
 ]);
