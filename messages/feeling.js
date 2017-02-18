@@ -2,6 +2,7 @@ var builder = require('botbuilder');
 var connector = new builder.ConsoleConnector().listen();
 var bot = new builder.UniversalBot(connector);
 const Dialog = require('./dialog.js');
+var diagnosis;
 
 
 bot.dialog('/',[
@@ -30,13 +31,21 @@ bot.dialog('/symptoms',[
   },
   function(session){
     session.Prompts.text(session, Dialog.guessDiagnosis + "GET DIAGNOSIS");
+    diagnosis = "GET DIAGNOSIS";
     session.beginDialog('/medicines');
   }
 ]);
 
 bot.dialog('/medicines',[
   function(session){
-    builder.Prompts.choice(session, Dialog.bestMeds + Dialog.medsList, ["Yes please!", "No thanks!"]);
+    if(diagnosis == "cold" || diagnosis == "flu")
+      var meds = Dialog.coldFluList;
+    else if(diagnosis == "fever")
+      var meds = Dialog.feverList;
+    else if(diagnosis == "strep throat")
+      var meds = Dialog.strepThroatList;
+      
+    builder.Prompts.choice(session, Dialog.bestMeds + meds, ["Yes please!", "No thanks!"]);
   },
   function(session, results){
     var locate = results.response;
