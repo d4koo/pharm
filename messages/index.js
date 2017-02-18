@@ -128,7 +128,7 @@ bot.dialog('/none', [
     }
     else
       session.send(Dialog.endMessage);
-  }
+  },
   function(session, results){
     var address = results.response.entity.replace(" ", "+");
     var url = "https://www.google.com/search?q=pharmacies+near+" + address;
