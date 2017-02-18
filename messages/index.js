@@ -49,7 +49,24 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
   },
   function(session, results){
     session.userData.feeling = results.response.entity;
-    session.beginDialog('/symptoms');
+  
+  function(session){
+    if(session.userData.feeling == 'sick'){
+      builder.Prompts.text(session, Dialog.askSymptoms);
+    }
+    else{
+      session.send(Dialog.notSick);
+      session.endDialog();
+    }
+  },
+  function(session, results){
+    session.userData.symptomsList = results.response;
+    session.send("Got it, so you're experiencing " + session.userData.symptomsList +".");
+  },
+  function(session){
+    session.Prompts.text(session, Dialog.guessDiagnosis + "GET DIAGNOSIS");
+    session.beginDialog('/medicines');
+  }
   }
 );
 
