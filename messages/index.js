@@ -35,41 +35,6 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 /*
 .matches('<yourIntent>')... See details at http://docs.botframework.com/builder/node/guides/understanding-natural-language/
 */
-/*.matches('feeling_flow',[
-  function(session){
-    builder.Prompts.choice(session, Dialog.entryMessage, ["Good", "Sick"]);
-  },
-  function(session, results){
-    session.userData.feeling = results.response.entity;
-    session.beginDialog('/symptoms');
-  }
-])*/
-
-/* .onDefault(
-  function(session){
-    builder.Prompts.choice(session, Dialog.entryMessage, ["Good", "Sick"]);
-  },
-  function(session, results){
-    session.userData.feeling = results.response.entity;
-  },
-  function(session){
-    if(session.userData.feeling == 'sick'){
-      builder.Prompts.text(session, Dialog.askSymptoms);
-    }
-    else{
-      session.send(Dialog.notSick);
-      session.endDialog();
-    }
-  },
-  function(session, results){
-    session.userData.symptomsList = results.response;
-    session.send("Got it, so you're experiencing " + session.userData.symptomsList +".");
-  },
-  function(session){
-    session.Prompts.text(session, Dialog.guessDiagnosis + "GET DIAGNOSIS");
-    session.beginDialog('/medicines');
-  }
-); */
 bot.dialog('/', intents);
 
 intents.matches('None', '/none');
@@ -195,29 +160,6 @@ bot.dialog('/profile', [
         session.beginDialog('/none');
     }
 ]);
-
-/*
-intents.matches('change_profile',[
-    function (session) {
-        builder.Prompts.text(session, 'Hi! What is your name?');
-    },
-    function (session, results) {
-        session.userData.name = results.response;
-        builder.Prompts.text(session, 'What year were you born?');
-    },
-    function (session, results) {
-        session.userData.birthYear = results.response;
-        builder.Prompts.number(session, "What is your Zip Code?");
-    },
-    function (session, results) {
-        session.userData.zipCode = results.response;
-        builder.Prompts.choice(session, 'Select your gender', ["Male", "Female", "Other"]);
-    },
-    function (session, results) {
-        session.userData.gender = results.response.entity;
-        session.endDialog();
-    }
-])*/
 
 intents.onDefault(builder.DialogAction.send("I'm sorry. I didn't understand."));
 
