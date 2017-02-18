@@ -100,7 +100,7 @@ bot.dialog('/', [
 
     for(var i = 0; i <symptoms.length; i++){
       for(var j = 0; j < iso.length; j++){
-        if(iso[j][0].includes(symptoms[i])){
+        if(symptoms[i].includes(iso[j][0])){
           idSymptoms.push(iso[j][1]);
         }
       }
