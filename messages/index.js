@@ -43,7 +43,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
   }
 ])
 
-.onDefault((session) => {
+.onDefault(
   function(session){
     builder.Prompts.choice(session, Dialog.entryMessage, ["Good", "Sick"]);
   },
@@ -51,7 +51,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
     session.userData.feeling = results.response.entity;
     session.beginDialog('/symptoms');
   }
-});
+);
 
 bot.dialog('/', intents);  
 bot.dialog('/symptoms',[
