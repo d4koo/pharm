@@ -131,6 +131,7 @@ bot.dialog('/none', [
     else
       session.send(Dialog.endMessage);
   },
+  
   function(session, results){
     var address = results.response.entity.replace(" ", "+");
     var url = "https://www.google.com/search?q=pharmacies+near+" + address;
@@ -171,10 +172,6 @@ bot.dialog('/none', [
       //     console.log(err, 'error when posting request for near pharmacies');
       //     return;
       //   }
-
-    //   });
-    // });
-
     session.send(Dialog.findPharms + url);
     session.send(Dialog.endMessage);
   }
