@@ -72,10 +72,13 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 ); */
 bot.dialog('/', intents);
 
-intents.onBegin(
+intents.matches('None', '/none');
+intents.matches('change_profile', '/profile');
+
+bot.dialog('/none', [
   function (session, args, next) {
       if (!session.userData.zipCode) {
-          //session.beginDialog('/profile');
+          session.beginDialog('/profile');
       } else {
           next();
       }
@@ -125,8 +128,8 @@ intents.onBegin(
     }
     session.send(Dialog.endMessage);
   }
-);
-intents.matches('change_profile', '/profile');
+]);
+
 /*
 intents.matches('change_profile',[
     function (session) {
