@@ -89,10 +89,10 @@ bot.dialog('/', [
   },
   function(session){
     session.send(Dialog.guessDiagnosis + "GET DIAGNOSIS");
-  }
+  },
   function(session){
     builder.Prompts.choice(session, Dialog.bestMeds + Dialog.medsList, ["Yes please!", "No thanks!"]);
-  }
+  },
   function(session,results){
     if(results.response == "Yes please!"){
       session.send(Dialog.findPharms)
