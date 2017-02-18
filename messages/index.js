@@ -76,9 +76,10 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
     session.beginDialog('/medicines');
   }
 ); */
+
 bot.dialog('/', [
   function (session, args, next) {
-      if (!session.userData.gender) {
+      if (!session.userData.zipCode) {
           session.beginDialog('/profile');
       } else {
           next();
@@ -141,8 +142,12 @@ bot.dialog('/profile', [
     },
     function (session, results) {
         session.userData.birthYear = results.response;
-        builder.Prompts.choice(session, Dialog.entryMessage, ["Male", "Female", "Other"]);
+        builder.Prompts.number(session, "What is your Zip Code?");
     },
+    function (session, results) {
+        session.userData.zipCode = results.response;
+        builder.Prompts.choice(session, Dialog.entryMessage, ["Male", "Female", "Other"]);
+    }
     function (session, results) {
         session.userData.gender = results.response.entity;
         session.endDialog();
