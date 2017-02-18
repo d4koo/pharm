@@ -73,14 +73,14 @@ bot.dialog('/', [
   function(session){
     builder.Prompts.choice(session, Dialog.entryMessage, ["Good", "Sick"]);
   },
-  function(session, results){
-    var areYouSick = results.response;
+  function(session, results, entity){
+    var areYouSick = resonse.entity;
     if(areYouSick == "Good"){
       session.send(Dialog.notSick);
       session.endDialog();
     }
     else{
-      session.send(results.response);
+      builder.Prompts.text(session, Dialog.askSymptoms);
     }
   },
   function(session, results){
