@@ -5,6 +5,7 @@ For a complete walkthrough of creating this type of bot see the article at
 http://docs.botframework.com/builder/node/guides/understanding-natural-language/
 -----------------------------------------------------------------------------*/
 "use strict";
+const Dialog = require('./dialog.js');
 var builder = require("botbuilder");
 var botbuilder_azure = require("botbuilder-azure");
 
@@ -32,14 +33,55 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 /*
 .matches('<yourIntent>')... See details at http://docs.botframework.com/builder/node/guides/understanding-natural-language/
 */
-.matches('Feeling', (session, args) => {
-    session.send('How are you feeling?');
-})
+.matches('feeling_flow',[
+  function(session){
+    builder.Prompts.choice(session, Dialog.entryMessage, ["Good", "Sick"]);
+  },
+  function(session, results){
+    session.userData.feeling = results.response.entity;
+    session.beginDialog('/symptoms');
+  }
+]);
+
 .onDefault((session) => {
     session.send('Sorry, I did not understand \'%s\'.', session.message.text);
 });
 
-bot.dialog('/', intents);    
+bot.dialog('/', intents);  
+bot.dialog('/symptoms',[
+  function(session){
+    if(session.userData.feeling == 'sick'){
+      builder.Prompts.text(session, Dialog.askSymptoms);
+    }
+    else{
+      session.send(Dialog.notSick);
+      session.endDialog();
+    }
+  },
+  function(session, results){
+    session.userData.symptomsList = results.response;
+    session.send("Got it, so you're experiencing " + session.userData.symptomsList +".");
+  },
+  function(session){
+    session.Prompts.text(session, Dialog.guessDiagnosis + "GET DIAGNOSIS");
+    session.beginDialog('/medicines');
+  }
+]);
+
+bot.dialog('/medicines',[
+  function(session){
+    builder.Prompts.choice(session, Dialog.bestMeds + Dialog.medsList, ["Yes please!", "No thanks!"]);
+  },
+  function(session, results){
+    var locate = results.response;
+    if(locate == "Yes please!"){
+      session.send(Dialog.findPharms)
+    }
+    else{
+      session.send(Dialog.endMessage);
+    }
+  }
+]);
 
 if (useEmulator) {
     var restify = require('restify');
