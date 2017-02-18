@@ -72,7 +72,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 ); */
 bot.dialog('/', intents);
 
-intents.onDefault(
+intents.onBegin(
   function (session, args, next) {
       if (!session.userData.zipCode) {
           //session.beginDialog('/profile');
@@ -148,6 +148,8 @@ intents.matches('change_profile',[
         session.endDialog();
     }
 ])
+
+intents.onDefault(builder.DialogAction.send("I'm sorry. I didn't understand."));
 
 /*
 bot.dialog('/', [
@@ -262,6 +264,7 @@ bot.dialog('/medicines',[
     }
   }
 ]);*/
+
 
 if (useEmulator) {
     var restify = require('restify');
