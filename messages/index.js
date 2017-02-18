@@ -86,13 +86,15 @@ bot.dialog('/', [
   },
   function(session, results){
     session.sendTyping();
-    var symptoms = results.response.replace(", ","-").split("-");
+    var symptoms = results.response.split(",");
     var idSymptoms = [];
+    var iso = [["Anxiety",238],["Back Pain",104],["Abodminal Pain",10],["Cough",15],["Headache",9]]; 
 
     for(var i = 0; i <symptoms.length; i++){
-      for(var j = 0; j<Symp.length; j++){
-        if(symptoms[i] == Symp[j][0])
-          idSymptoms.push(Symp[j][1]);
+      for(var j = 0; j < iso.length; j++){
+        if(iso[j][0].includes(symptoms[i])){
+          idSymptoms.push(iso[j][1]);
+        }
       }
     }
 
