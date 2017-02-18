@@ -172,8 +172,8 @@ bot.dialog('/none', [
       //     return;
       //   }
 
-      });
-    });
+    //   });
+    // });
 
     session.send(Dialog.findPharms + url);
     session.send(Dialog.endMessage);
