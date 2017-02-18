@@ -36,15 +36,11 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 .matches('<yourIntent>')... See details at http://docs.botframework.com/builder/node/guides/understanding-natural-language/
 */
 
-/*.matches('feeling_flow',[
+.matches('change_profile',[
   function(session){
-    builder.Prompts.choice(session, Dialog.entryMessage, ["Good", "Sick"]);
+    session.beginDialog('/profile');
   },
-  function(session, results){
-    session.userData.feeling = results.response.entity;
-    session.beginDialog('/symptoms');
-  }
-])*/
+])
 
 /* .onDefault(
   function(session){
@@ -73,7 +69,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 ); */
 bot.dialog('/', [
   function (session, args, next) {
-      if (!session.userData.name) {
+      if (!session.userData.gender) {
           session.beginDialog('/profile');
       } else {
           next();
@@ -106,8 +102,13 @@ bot.dialog('/', [
       }
     }
 
+<<<<<<< HEAD
     // Get request using idSymptoms[0] and idSymptoms[1] for diagnosis.
     // Then GET diagnosis Issue["Name"] 
+=======
+    session.send("Got it, so you're experiencing " +idSymptoms+".");
+    session.send(Dialog.guessDiagnosis + symptoms);
+>>>>>>> 7268e215943e5c1f0db6a465226fd3de0409ddb1
 
     session.send("Got it, so you're experiencing " +symptoms+".");
     session.send(Dialog.guessDiagnosis + idSymptoms);
@@ -127,6 +128,16 @@ bot.dialog('/profile', [
     },
     function (session, results) {
         session.userData.name = results.response;
+        builder.Prompts.choice(session, 'Select your gender', ["Male", "Female", "Other"]);
+    },
+    function (session, results)
+    {
+        session.userData.gender = results.response.entity;
+        builder.Prompts.text(session, 'What year were you born?');
+    },
+    function (session, results)
+    {
+        session.userData.birthYear = results.response;
         session.endDialog();
     }
 ]);

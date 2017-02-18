@@ -6,7 +6,7 @@ module.exports = [["anxiety",238],["back pain",104],["abodminal pain",10],["coug
   ["itching eyes",73],["itching in the nose",96],["lip swelling",35],["memory gap",235],["menstruation disorder",112],
   ["missed period",123],["nausea", 44],["neck pain",136],["nervousness",114],["night cough", 133],["pain in the limbs",12],
   ["pain on swallowing",203],["palpitations",37],["paralysis",140],["reduced appetite",54],["runny nose",14],
-  ["shorntess of breath",29],["skin rash",124],["sleeplessness",52],["sneezing",95],["sore throat",13],
+  ["shortness of breath",29],["skin rash",124],["sleeplessness",52],["sneezing",95],["sore throat",13],
   ["sputum",64],["stomach burning",179],["stuffy nose",28],["sweating",138],["swollen glands in armpits", 248],
   ["tears", 211],["tiredness",16],["termor at rest",115],["unconsciouness short",144],["vomiting",101],
   ["vomiting blood", 181],["weakness",56],["weight gain",23],["wheezing",30]];
