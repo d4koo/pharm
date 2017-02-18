@@ -42,11 +42,17 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
     session.userData.feeling = results.response.entity;
     session.beginDialog('/symptoms');
   }
-]);
+])
 
-.onDefault((session) => {
-    session.send('Sorry, I did not understand \'%s\'.', session.message.text);
-});
+.onDefault(
+  function(session){
+    builder.Prompts.choice(session, Dialog.entryMessage, ["Good", "Sick"]);
+  },
+  function(session, results){
+    session.userData.feeling = results.response.entity;
+    session.beginDialog('/symptoms');
+  }
+);
 
 bot.dialog('/', intents);  
 bot.dialog('/symptoms',[
