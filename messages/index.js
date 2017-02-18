@@ -89,17 +89,17 @@ bot.dialog('/', [
     var symptoms = results.response.replace(" ,",",").split(",");
     var idSymptoms = [];
 
-    for(var i = 0; i <symptoms.length; i++){
-      for(var j = 0; j<Symp.length; j++){
-        if(Symp[j].name = symptoms[i]){
-          idSymptoms.push(Symp[j].id);
+    for(var i = 0; i <symptoms.length;i++){
+      for(var j = 0; j < Symp.length; j++){
+        if(Symp[0][j].name == symptoms[i]){
+          idSymptoms.push(Symp[0][j].id);
         }
       }
     }
 
 
 
-    session.send("Got it, so you're experiencing " +Symp+".");
+    session.send("Got it, so you're experiencing " +idSymptoms+".");
     session.send(Dialog.guessDiagnosis + symptoms);
     builder.Prompts.choice(session, Dialog.bestMeds + Dialog.medsList, ["Yes please!", "No thanks!"]);
   },
