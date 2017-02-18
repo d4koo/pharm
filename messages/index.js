@@ -81,7 +81,8 @@ bot.dialog('/', [
     }
     else{
       console.log(results.response);
-      session.send(results.response);
+      //session.send(results.response);
+      next();
     }
   },
   function(session, results){
