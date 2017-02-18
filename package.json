@@ -1,0 +1,26 @@
+{
+  "name": "pharm",
+  "version": "1.0.0",
+  "description": "Diagnosing patients based on symptoms and locating the nearest pharmacies with suitable antibiotics",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.14.1",
+    "lodash": "^4.17.4",
+    "node": "0.0.0",
+    "react": "^15.4.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/d4koo/pharm.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/d4koo/pharm/issues"
+  },
+  "homepage": "https://github.com/d4koo/pharm#readme"
+}
