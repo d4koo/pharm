@@ -104,14 +104,12 @@ bot.dialog('/', [
         }
       }
     }
-<<<<<<< HEAD
+
     session.send("Got it, so you're experiencing " +idSymptoms+".");
     session.send(Dialog.guessDiagnosis + symptoms);
-=======
 
     session.send("Got it, so you're experiencing " +symptoms+".");
     session.send(Dialog.guessDiagnosis + idSymptoms);
->>>>>>> 0a3c56917d42e9061d269c19d37e64891fe84055
     builder.Prompts.choice(session, Dialog.bestMeds + Dialog.medsList, ["Yes please!", "No thanks!"]);
   },
   function(session,results){
