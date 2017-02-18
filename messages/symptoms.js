@@ -1,15 +1,13 @@
-module.exports={
-    var symptoms = {
-        "Abdominal pain": {
-            ID: 10,
-        },
-        "Anxiety": {
-            ID: 238,
-        },
-        "Back pain": {
-            ID: 104,
-        }
-    };
+module.exports= {
+  "Abdominal pain": {
+      ID: 10,
+  },
+  "Anxiety": {
+      ID: 238,
+  },
+  "Back pain": {
+      ID: 104,
+  }
 }
 
 /* {
