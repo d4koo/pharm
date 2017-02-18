@@ -73,14 +73,18 @@ bot.dialog('/', [
   function(session){
     builder.Prompts.choice(session, Dialog.entryMessage, ["Good", "Sick"]);
   },
+<<<<<<< HEAD
   function(session, results, entity){
     var areYouSick = resonse.entity;
+>>>>>>> 7ab4323c566180dfda474b021e07f2d74d6d9336
     if(areYouSick == "Good"){
       session.send(Dialog.notSick);
       session.endDialog();
     }
     else{
+<<<<<<< HEAD
       builder.Prompts.text(session, Dialog.askSymptoms);
+>>>>>>> 7ab4323c566180dfda474b021e07f2d74d6d9336
     }
   },
   function(session, results){
