@@ -72,10 +72,10 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 ); */
 bot.dialog('/', intents);
 
-.onDefault(
+intents.onDefault(
   function (session, args, next) {
       if (!session.userData.zipCode) {
-          session.beginDialog('/profile');
+          //session.beginDialog('/profile');
       } else {
           next();
       }
@@ -127,7 +127,7 @@ bot.dialog('/', intents);
   }
 );
 
-.matches('change_profile',[
+intents.matches('change_profile',[
     function (session) {
         builder.Prompts.text(session, 'Hi! What is your name?');
     },
