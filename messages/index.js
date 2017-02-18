@@ -71,7 +71,15 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
   }
 ); */
 bot.dialog('/', [
-  function(session){
+  function (session, args, next) {
+      if (!session.userData.name) {
+          session.beginDialog('/profile');
+      } else {
+          next();
+      }
+  },
+  function(session, results){
+    session.send('Hello %s!');
     builder.Prompts.choice(session, Dialog.entryMessage, ["Good", "Sick"]);
   },
   function(session, results){
@@ -110,6 +118,16 @@ bot.dialog('/', [
   }
 ]);
 
+bot.dialog('/profile', [
+    function (session) {
+        builder.Prompts.text(session, 'Hi! What is your name?');
+    },
+    function (session, results) {
+        session.userData.name = results.response;
+        builder.Prompts.text()
+        session.endDialog();
+    }
+]);
 
 /*bot.dialog('/', intents);  
 bot.dialog('/symptoms',[
