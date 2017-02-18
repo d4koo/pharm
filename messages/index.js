@@ -86,11 +86,7 @@ bot.dialog('/', [
   function(session, results){
     var symptoms = results.response;
     session.send("Got it, so you're experiencing " +symptoms+".");
-  },
-  function(session){
     session.send(Dialog.guessDiagnosis + "GET DIAGNOSIS");
-  },
-  function(session){
     builder.Prompts.choice(session, Dialog.bestMeds + Dialog.medsList, ["Yes please!", "No thanks!"]);
   },
   function(session,results){
