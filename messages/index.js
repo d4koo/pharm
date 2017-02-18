@@ -5,6 +5,7 @@ For a complete walkthrough of creating this type of bot see the article at
 http://docs.botframework.com/builder/node/guides/understanding-natural-language/
 -----------------------------------------------------------------------------*/
 "use strict";
+const request = require('request');
 const Dialog = require('./dialog.js');
 const Symp = require('./symptoms.js');
 var builder = require("botbuilder");
@@ -104,6 +105,9 @@ bot.dialog('/', [
         }
       }
     }
+
+    // Get request using idSymptoms[0] and idSymptoms[1] for diagnosis.
+    // Then GET diagnosis Issue["Name"] 
 
     session.send("Got it, so you're experiencing " +symptoms+".");
     session.send(Dialog.guessDiagnosis + idSymptoms);
