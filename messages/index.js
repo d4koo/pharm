@@ -33,7 +33,8 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 /*
 .matches('<yourIntent>')... See details at http://docs.botframework.com/builder/node/guides/understanding-natural-language/
 */
-.matches('feeling_flow',[
+
+/*.matches('feeling_flow',[
   function(session){
     builder.Prompts.choice(session, Dialog.entryMessage, ["Good", "Sick"]);
   },
@@ -41,7 +42,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
     session.userData.feeling = results.response.entity;
     session.beginDialog('/symptoms');
   }
-])
+])*/
 
 /* .onDefault(
   function(session){
@@ -68,8 +69,40 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
     session.beginDialog('/medicines');
   }
 ); */
+bot.dialog('/', [
+  function(session){
+    builder.Prompts.choice(session, Dialog.entryMessage, ["Good", "Sick"]);
+  },
+  function(session, results){
+    var areYouSick = results.response;
+    if(areYouSick == "Good"){
+      session.send(Dialog.notSick);
+      session.endDialog();
+    }
+    else{
+      builder.Prompts.text(session, Dialog.askSymptoms);
+    }
+  },
+  function(session, results){
+    var symptoms = results.response;
+    session.send("Got it, so you're experiencing " +symptoms+".");
+  },
+  function(session){
+    session.send(Dialog.guessDiagnosis + "GET DIAGNOSIS");
+  }
+  function(session){
+    builder.Prompts.choice(session, Dialog.bestMeds + Dialog.medsList, ["Yes please!", "No thanks!"]);
+  }
+  function(session,results){
+    if(results.response == "Yes please!"){
+      session.send(Dialog.findPharms)
+    }
+    session.send(Dialog.endMessage);
+  }
+]);
 
-bot.dialog('/', intents);  
+
+/*bot.dialog('/', intents);  
 bot.dialog('/symptoms',[
   function(session){
     if(session.userData.feeling == 'sick'){
@@ -103,7 +136,7 @@ bot.dialog('/medicines',[
       session.send(Dialog.endMessage);
     }
   }
-]);
+]);*/
 
 if (useEmulator) {
     var restify = require('restify');
