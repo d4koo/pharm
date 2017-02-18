@@ -90,10 +90,9 @@ bot.dialog('/', [
     var idSymptoms = [];
 
     for(var i = 0; i <symptoms.length;i++){
-      for(var j = 0; j < Symp[0].length; j++){
-        if(Symp[0][j].name == symptoms[i]){
-          idSymptoms.push(Symp[0][j].id);
-        }
+      for(var j = 0; j<Symp.length; j++){
+        if(symptoms[i] == Symp[j][0])
+          idSymptoms.push(Symp[j][1]);
       }
     }
 
