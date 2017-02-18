@@ -1,4 +1,4 @@
-module.exports = [["Anxiety",238],["Back Pain",104],["Abodminal Pain",10]];
+module.exports = [["Anxiety",238],["Back Pain",104],["Abodminal Pain",10],["Cough",15],["Headache",9]];
 
 // module.exports= {
 //     "Abdominal pain": {
