@@ -49,7 +49,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
   },
   function(session, results){
     session.userData.feeling = results.response.entity;
-  
+  },
   function(session){
     if(session.userData.feeling == 'sick'){
       builder.Prompts.text(session, Dialog.askSymptoms);
@@ -66,7 +66,6 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
   function(session){
     session.Prompts.text(session, Dialog.guessDiagnosis + "GET DIAGNOSIS");
     session.beginDialog('/medicines');
-  }
   }
 );
 
