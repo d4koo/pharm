@@ -6,7 +6,7 @@ http://docs.botframework.com/builder/node/guides/understanding-natural-language/
 -----------------------------------------------------------------------------*/
 "use strict";
 const Dialog = require('./dialog.js');
-const Symtpoms = require('./symtpoms.js');
+const Symp = require('./symptoms.js');
 var builder = require("botbuilder");
 var botbuilder_azure = require("botbuilder-azure");
 
