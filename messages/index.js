@@ -13,6 +13,8 @@ var botbuilder_azure = require("botbuilder-azure");
 
 var useEmulator = (process.env.NODE_ENV == 'development');
 
+var API_KEY = "AIzaSyDNEXmxnsK3Ry7Rpc3RH_AKftt1beWWuSg";
+
 var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure.BotServiceConnector({
     appId: process.env['MicrosoftAppId'],
     appPassword: process.env['MicrosoftAppPassword'],
@@ -120,8 +122,56 @@ bot.dialog('/', [
   },
   function(session,results){
     if(results.response.entity == "Yes please!"){
-      session.send(Dialog.findPharms)
+      builder.Prompts.choice(session, "What is the closest address to you? (Try to be as detailed as possible)");
     }
+    else
+      session.send(Dialog.endMessage);
+  }
+  function(session, results){
+    var address = results.response.entity.replace(" ", "+");
+    var url = "https://www.google.com/search?q=pharmacies+near+" + address;
+    // var url = "https://maps.googleapis.com/maps/api/geocode/"
+    // var options = {
+    //   method: "POST",
+    //   body: {
+    //     "address": address,
+    //     "key": API_KEY,        
+    //   },
+    //   json: true,
+    //   url: url
+    // }
+
+    // var result_link = '';
+    // request(options, function(err, res, body) {
+    //   if (err) {
+    //     console.log(err, 'error when posting request for geocode');
+    //     return;
+    //   }      
+
+    //   result_link = res.
+      // var location = body.geometry.location.lat + ',' + body.geometry.location.lng;
+      // var url = "https://maps.googleapis.com/maps/api/place/nearbysearch/"
+      // var options = {
+      //   method: "POST",
+      //   body: {
+      //     "location": location,
+      //     "radius": 500,
+      //     "type": "pharmacy",
+      //     "key": API_KEY,
+      //   },
+      //   json: true,
+      //   url: url
+      // }
+      // request(options, function(err, res, body) {
+      //   if (err) {
+      //     console.log(err, 'error when posting request for near pharmacies');
+      //     return;
+      //   }
+
+      })
+    })
+
+    session.send(Dialog.findPharms + url);
     session.send(Dialog.endMessage);
   }
 ]);
