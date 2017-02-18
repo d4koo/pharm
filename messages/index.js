@@ -130,6 +130,29 @@ bot.dialog('/none', [
   }
 ]);
 
+bot.dialog('/profile', [
+    function (session) {
+        builder.Prompts.text(session, 'Hi! What is your name?');
+    },
+    function (session, results) {
+        session.userData.name = results.response;
+        builder.Prompts.text(session, 'What year were you born?');
+    },
+    function (session, results) {
+        session.userData.birthYear = results.response;
+        builder.Prompts.number(session, "What is your Zip Code?");
+    },
+    function (session, results) {
+        session.userData.zipCode = results.response;
+        builder.Prompts.choice(session, 'Select your gender', ["Male", "Female", "Other"]);
+    },
+    function (session, results) {
+        session.userData.gender = results.response.entity;
+        session.send('Profile complete.')
+        session.beginDialog('/none');
+    }
+]);
+
 /*
 intents.matches('change_profile',[
     function (session) {
@@ -211,28 +234,6 @@ bot.dialog('/', [
   }
 ]);
 */
-bot.dialog('/profile', [
-    function (session) {
-        builder.Prompts.text(session, 'Hi! What is your name?');
-    },
-    function (session, results) {
-        session.userData.name = results.response;
-        builder.Prompts.text(session, 'What year were you born?');
-    },
-    function (session, results) {
-        session.userData.birthYear = results.response;
-        builder.Prompts.number(session, "What is your Zip Code?");
-    },
-    function (session, results) {
-        session.userData.zipCode = results.response;
-        builder.Prompts.choice(session, 'Select your gender', ["Male", "Female", "Other"]);
-    },
-    function (session, results) {
-        session.userData.gender = results.response.entity;
-        session.send('Profile complete.')
-        session.beginDialog('/none');
-    }
-]);
 
 /*bot.dialog('/', intents);  
 bot.dialog('/symptoms',[
