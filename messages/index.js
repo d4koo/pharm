@@ -44,7 +44,7 @@ intents.matches('change_profile', '/profile');
 
 bot.dialog('/none', [
   function (session, args, next) {
-      if (!session.userData.zipCode) {
+      if (!session.userData.name) {
           session.beginDialog('/profile');
       } else {
           next();
@@ -152,10 +152,6 @@ bot.dialog('/profile', [
     },
     function (session, results) {
         session.userData.birthYear = results.response;
-        builder.Prompts.number(session, "What is your Zip Code?");
-    },
-    function (session, results) {
-        session.userData.zipCode = results.response;
         builder.Prompts.choice(session, 'Select your gender', ["Male", "Female", "Other"]);
     },
     function (session, results) {
