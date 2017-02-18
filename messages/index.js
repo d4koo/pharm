@@ -75,7 +75,6 @@ bot.dialog('/', [
   },
   function(session, results){
     var areYouSick = results.response.entity;
-    session.send(areYouSick);
     if(areYouSick == "Good"){
       session.send(Dialog.notSick);
       session.endDialog();
@@ -86,13 +85,13 @@ bot.dialog('/', [
   },
   function(session, results){
     session.sendTyping();
-    var symptoms = results.response;
+    var symptoms = results.response.entity;
     session.send("Got it, so you're experiencing " +symptoms+".");
     session.send(Dialog.guessDiagnosis + "GET DIAGNOSIS");
     builder.Prompts.choice(session, Dialog.bestMeds + Dialog.medsList, ["Yes please!", "No thanks!"]);
   },
   function(session,results){
-    if(results.response == "Yes please!"){
+    if(results.response.entity == "Yes please!"){
       session.send(Dialog.findPharms)
     }
     session.send(Dialog.endMessage);
