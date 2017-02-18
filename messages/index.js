@@ -89,7 +89,7 @@ bot.dialog('/', [
     var symptoms = results.response.replace(" ,",",").split(",");
     var idSymptoms = [];
 
-    for(var i = 0; i <symptoms.length;i++){
+    for(var i = 0; i <symptoms.length; i++){
       for(var j = 0; j<Symp.length; j++){
         if(symptoms[i] == Symp[j][0])
           idSymptoms.push(Symp[j][1]);
