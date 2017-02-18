@@ -91,8 +91,9 @@ bot.dialog('/', [
 
     for(var i = 0; i <symptoms.length; i++){
       for(var j = 0; j<Symp.length; j++){
-        if(Symp[j].name = symptoms[i])
+        if(Symp[j].name = symptoms[i]){
           idSymptoms.push(Symp[j].id);
+        }
       }
     }
 
