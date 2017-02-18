@@ -6,6 +6,7 @@ http://docs.botframework.com/builder/node/guides/understanding-natural-language/
 -----------------------------------------------------------------------------*/
 "use strict";
 const Dialog = require('./dialog.js');
+const Symtpoms = require('./symtpoms.js');
 var builder = require("botbuilder");
 var botbuilder_azure = require("botbuilder-azure");
 
@@ -74,7 +75,7 @@ bot.dialog('/', [
     builder.Prompts.choice(session, Dialog.entryMessage, ["Good", "Sick"]);
   },
   function(session, results){
-    var areYouSick = results.response;
+    var areYouSick = results.response.entity;
     if(areYouSick == "Good"){
       session.send(Dialog.notSick);
       session.endDialog();
@@ -99,7 +100,7 @@ bot.dialog('/', [
     builder.Prompts.choice(session, Dialog.bestMeds + Dialog.medsList, ["Yes please!", "No thanks!"]);
   },
   function(session,results){
-    if(results.response == "Yes please!"){
+    if(results.response.entity == "Yes please!"){
       session.send(Dialog.findPharms)
     }
     session.send(Dialog.endMessage);
