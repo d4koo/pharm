@@ -41,7 +41,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
     session.userData.feeling = results.response.entity;
     session.beginDialog('/symptoms');
   }
-]);
+])
 
 .onDefault((session) => {
     session.send('Sorry, I did not understand \'%s\'.', session.message.text);
