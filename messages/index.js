@@ -78,14 +78,14 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 ); */
 bot.dialog('/', [
   function (session, args, next) {
-      if (!session.userData.name) {
+      if (!session.userData.gender) {
           session.beginDialog('/profile');
       } else {
           next();
       }
   },
   function(session, results){
-    session.send('Hello %s!', session.userData.name);
+    session.send('Hello %s, %s!', session.userData.name, session.userData.gender);
     builder.Prompts.choice(session, Dialog.entryMessage, ["Good", "Sick"]);
   },
   function(session, results){
