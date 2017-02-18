@@ -81,19 +81,19 @@ bot.dialog('/none', [
     var diag = "Not sure!";
     var medList = "Tylenol, Advil, or see a doctor!"
 
-    if((fOne == 238 || fTwo == 238) && (fOne == 9 || fTwo == 9)) || ((fOne == 238 || fTwo == 238) && (fOne == 54 || fTwo == 54)){
+    if(((fOne == 238 || fTwo == 238) && (fOne == 9 || fTwo == 9)) || ((fOne == 238 || fTwo == 238) && (fOne == 54 || fTwo == 54))){
       diag = "depression";
       medList = Dialog.medsDepression;
     }
-    else if((fOne == 17 || fTwo == 17) && (fOne == 57 || fTwo == 57)) || ((fOne == 17 || fTwo == 17) && (fOne == 31 || fTwo == 31)) || (fOne == 31 || fTwo == 31){
+    else if(((fOne == 17 || fTwo == 17) && (fOne == 57 || fTwo == 57)) || ((fOne == 17 || fTwo == 17) && (fOne == 31 || fTwo == 31)) || (fOne == 31 || fTwo == 31)){
       diag = "coronary heart disease";
       medList = Dialog.medsHeart;
     }
-    else if((fOne == 15 || fTwo == 15) && (fOne == 9 || fTwo == 9)) || ((fOne == 46 || fTwo == 46) && (fOne == 56 || fTwo == 56)) || (fOne == 15 || fTwo == 15) {
+    else if(((fOne == 15 || fTwo == 15) && (fOne == 9 || fTwo == 9)) || ((fOne == 46 || fTwo == 46) && (fOne == 56 || fTwo == 56)) || (fOne == 15 || fTwo == 15)) {
       diag = "cold";
       medList = Dialog.medsCold;
     }
-    else if((fOne == 101 || fTwo == 101) && (fOne == 9 || fTwo == 9)){
+    else if(((fOne == 101 || fTwo == 101) && (fOne == 9 || fTwo == 9))){
       diag = "sick headache";
       medList = Dialog.medsHead;
     }
@@ -101,11 +101,11 @@ bot.dialog('/none', [
       diag = "food poisoning";
       medList = Dialog.medsFood;
     }
-    else if((fOne == 10 || fTwo == 10) && (fOne == 122 || fTwo == 122)) || (fOne == 17 || fTwo == 17){
+    else if(((fOne == 10 || fTwo == 10) && (fOne == 122 || fTwo == 122)) || (fOne == 17 || fTwo == 17)){
       diag = "reflux disease";
       medList = Dialog.medsReflux;
     }
-    else if((fOne == 13 || fTwo == 13) && (fOne == 87 || fTwo == 87)) || (fOne == 87 || fTwo == 87){
+    else if(((fOne == 13 || fTwo == 13) && (fOne == 87 || fTwo == 87)) || (fOne == 87 || fTwo == 87)){
       diag = "inflammation of the nose and throat";
       medList = Dialog.medsInflam;
     }
@@ -113,11 +113,11 @@ bot.dialog('/none', [
       diag = "kidney stones";
       medList = Dialog.medsKidStn;
     }
-    else if((fOne == 28 || fTwo == 28) && (fOne == 95 || fTwo == 95)) || (fOne == 14 || fTwo == 14){
+    else if(((fOne == 28 || fTwo == 28) && (fOne == 95 || fTwo == 95)) || (fOne == 14 || fTwo == 14)){
       diag = "flu";
       medList = Dialog.medsFlu;
     }
-    else if((fOne == 13 || fTwo == 13) && (fOne == 101 || fTwo == 101)){
+    else if(((fOne == 13 || fTwo == 13) && (fOne == 101 || fTwo == 101))){
       diag = "kissing disease";
       medList = Dialog.medsMono;
     }
