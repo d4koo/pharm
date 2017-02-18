@@ -73,7 +73,7 @@ bot.dialog('/', [
   function(session){
     builder.Prompts.choice(session, Dialog.entryMessage, ["Good", "Sick"]);
   },
-  function(session, response, entity){
+  function(session, response){
     var areYouSick = results.response.entity.name;
     if(areYouSick == "Good"){
       session.send(Dialog.notSick);
