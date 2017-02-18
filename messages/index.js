@@ -85,6 +85,7 @@ bot.dialog('/', [
     }
   },
   function(session, results){
+    session.sendTyping();
     var symptoms = results.response;
     session.send("Got it, so you're experiencing " +symptoms+".");
     session.send(Dialog.guessDiagnosis + "GET DIAGNOSIS");
