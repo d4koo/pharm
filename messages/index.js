@@ -105,9 +105,6 @@ bot.dialog('/', [
         }
       }
     }
-
-
-
     session.send("Got it, so you're experiencing " +idSymptoms+".");
     session.send(Dialog.guessDiagnosis + symptoms);
     builder.Prompts.choice(session, Dialog.bestMeds + Dialog.medsList, ["Yes please!", "No thanks!"]);
@@ -126,6 +123,16 @@ bot.dialog('/profile', [
     },
     function (session, results) {
         session.userData.name = results.response;
+        builder.Prompts.choice(session, 'Select your gender', ["Good", "Sick"]);
+    },
+    function (session, results)
+    {
+        session.userData.gender = results.response.entity;
+        builder.Prompts.text(session, 'What year were you born?');
+    },
+    function (session, results)
+    {
+        session.userData.birthYear = results.response;
         session.endDialog();
     }
 ]);
