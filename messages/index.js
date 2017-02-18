@@ -98,7 +98,7 @@ bot.dialog('/none', [
   },
   
   function(session, results){
-    var address = results.response.entity.replace(/ /g, "+");
+    var address = results.response.replace(/ /g, "+");
     var url = "https://www.google.com/search?q=pharmacies+near+" + address;
     // var url = "https://maps.googleapis.com/maps/api/geocode/"
     // var options = {
