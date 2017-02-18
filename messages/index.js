@@ -151,7 +151,7 @@ bot.dialog('/none', [
 
     session.send("Got it, so you're experiencing " +symptoms+".");
     session.send(Dialog.guessDiagnosis + diag);
-    builder.Prompts.choice(session, Dialog.bestMeds + Dialog.medsList, ["Yes please!", "No thanks!"]);
+    builder.Prompts.choice(session, Dialog.bestMeds + medList, ["Yes please!", "No thanks!"]);
   },
   function(session,results){
     if(results.response.entity == "Yes please!"){
