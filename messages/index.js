@@ -147,7 +147,7 @@ bot.dialog('/profile', [
     function (session, results) {
         session.userData.zipCode = results.response;
         builder.Prompts.choice(session, Dialog.entryMessage, ["Male", "Female", "Other"]);
-    }
+    },
     function (session, results) {
         session.userData.gender = results.response.entity;
         session.endDialog();
