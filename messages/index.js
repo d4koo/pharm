@@ -76,7 +76,71 @@ bot.dialog('/none', [
         }
       }
     }
+    var fOne = idSymptoms[0];
+    var fTwo = idSymptoms[1];
+    var diag = "Not sure!";
+    var medList = "Tylenol, Advil, or see a doctor!"
 
+    if((fOne == 238 || fTwo == 238) && (fOne == 9 || fTwo == 9)) || ((fOne == 238 || fTwo == 238) && (fOne == 54 || fTwo == 54)){
+      diag = "depression";
+      medList = Dialog.medsDepression;
+    }
+    else if((fOne == 17 || fTwo == 17) && (fOne == 57 || fTwo == 57)) || ((fOne == 17 || fTwo == 17) && (fOne == 31 || fTwo == 31)) || (fOne == 31 || fTwo == 31){
+      diag = "coronary heart disease";
+      medList = Dialog.medsHeart;
+    }
+    else if((fOne == 15 || fTwo == 15) && (fOne == 9 || fTwo == 9)) || ((fOne == 46 || fTwo == 46) && (fOne == 56 || fTwo == 56)) || (fOne == 15 || fTwo == 15) {
+      diag = "cold";
+      medList = Dialog.medsCold;
+    }
+    else if((fOne == 101 || fTwo == 101) && (fOne == 9 || fTwo == 9)){
+      diag = "sick headache";
+      medList = Dialog.medsHead;
+    }
+    else if((fOne == 44 || fTwo == 44) && (fOne == 101 || fTwo == 101)){
+      diag = "food poisoning";
+      medList = Dialog.medsFood;
+    }
+    else if((fOne == 10 || fTwo == 10) && (fOne == 122 || fTwo == 122)) || (fOne == 17 || fTwo == 17){
+      diag = "reflux disease";
+      medList = Dialog.medsReflux;
+    }
+    else if((fOne == 13 || fTwo == 13) && (fOne == 87 || fTwo == 87)) || (fOne == 87 || fTwo == 87){
+      diag = "inflammation of the nose and throat";
+      medList = Dialog.medsInflam;
+    }
+    else if((fOne == 104 || fTwo == 104) && (fOne == 10 || fTwo == 10)){
+      diag = "kidney stones";
+      medList = Dialog.medsKidStn;
+    }
+    else if((fOne == 28 || fTwo == 28) && (fOne == 95 || fTwo == 95)) || (fOne == 14 || fTwo == 14){
+      diag = "flu";
+      medList = Dialog.medsFlu;
+    }
+    else if((fOne == 13 || fTwo == 13) && (fOne == 101 || fTwo == 101)){
+      diag = "kissing disease";
+      medList = Dialog.medsMono;
+    }
+    else if (fOne == 104 || fTwo == 104){
+      diag = "slipped disc";
+      medList = Dialog.medsDisc;
+    }
+    else if (fOne == 238 || fTwo == 238){
+      diag = "excessive feeling of fear";
+      medList = Dialog.medsFear; 
+    }
+    else if (fOne == 10 || fTwo == 10){
+      diag = "bloated belly";
+      medList = Dialog.medsFear;
+    }
+    else if (fOne == 9 || fTwo == 9){
+      diag = "headache";
+      medList = Dialog.medsAche;
+    }
+    else if(idSymptoms.length > 4){
+      diag = "You seem really sick, maybe it's something serious";
+      medList = Dialog.medsCancer;
+    }
     // Get request using idSymptoms[0] and idSymptoms[1] for diagnosis.
     // Then GET diagnosis Issue["Name"] 
     // request('https://sandbox-healthservice.priaid.ch/diagnosis?symptoms=[\"13\"]&gender=male&year_of_birth=1988&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImRvbmFsZGtvbzcyQGdtYWlsLmNvbSIsInJvbGUiOiJVc2VyIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvc2lkIjoiMTE4OCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvdmVyc2lvbiI6IjIwMCIsImh0dHA6Ly9leGFtcGxlLm9yZy9jbGFpbXMvbGltaXQiOiI5OTk5OTk5OTkiLCJodHRwOi8vZXhhbXBsZS5vcmcvY2xhaW1zL21lbWJlcnNoaXAiOiJQcmVtaXVtIiwiaHR0cDovL2V4YW1wbGUub3JnL2NsYWltcy9sYW5ndWFnZSI6ImVuLWdiIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9leHBpcmF0aW9uIjoiMjA5OS0xMi0zMSIsImh0dHA6Ly9leGFtcGxlLm9yZy9jbGFpbXMvbWVtYmVyc2hpcHN0YXJ0IjoiMjAxNy0wMi0xOCIsImlzcyI6Imh0dHBzOi8vc2FuZGJveC1hdXRoc2VydmljZS5wcmlhaWQuY2giLCJhdWQiOiJodHRwczovL2hlYWx0aHNlcnZpY2UucHJpYWlkLmNoIiwiZXhwIjoxNDg3NDU2MDMyLCJuYmYiOjE0ODc0NDg4MzJ9.7Z1BSjILmw-kn4EROR4pdcTaEShdgVXvcBJ3PCY2JxI&language=en-gb&format=json', function (error, response, body) {
@@ -86,7 +150,7 @@ bot.dialog('/none', [
     // })
 
     session.send("Got it, so you're experiencing " +symptoms+".");
-    session.send(Dialog.guessDiagnosis + idSymptoms);
+    session.send(Dialog.guessDiagnosis + diag);
     builder.Prompts.choice(session, Dialog.bestMeds + Dialog.medsList, ["Yes please!", "No thanks!"]);
   },
   function(session,results){
