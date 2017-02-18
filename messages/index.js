@@ -35,15 +35,11 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 .matches('<yourIntent>')... See details at http://docs.botframework.com/builder/node/guides/understanding-natural-language/
 */
 
-/*.matches('feeling_flow',[
+.matches('change_profile',[
   function(session){
-    builder.Prompts.choice(session, Dialog.entryMessage, ["Good", "Sick"]);
+    session.beginDialog('/profile');
   },
-  function(session, results){
-    session.userData.feeling = results.response.entity;
-    session.beginDialog('/symptoms');
-  }
-])*/
+])
 
 /* .onDefault(
   function(session){
@@ -126,7 +122,7 @@ bot.dialog('/profile', [
     },
     function (session, results) {
         session.userData.name = results.response;
-        builder.Prompts.choice(session, 'Select your gender', ["Good", "Sick"]);
+        builder.Prompts.choice(session, 'Select your gender', ["Male", "Female", "Other"]);
     },
     function (session, results)
     {
