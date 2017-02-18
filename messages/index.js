@@ -43,7 +43,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
   }
 ])
 
-.onDefault(
+/* .onDefault(
   function(session){
     builder.Prompts.choice(session, Dialog.entryMessage, ["Good", "Sick"]);
   },
@@ -67,7 +67,7 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
     session.Prompts.text(session, Dialog.guessDiagnosis + "GET DIAGNOSIS");
     session.beginDialog('/medicines');
   }
-);
+); */
 
 bot.dialog('/', intents);  
 bot.dialog('/symptoms',[
