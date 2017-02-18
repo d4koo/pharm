@@ -1,4 +1,16 @@
 module.exports= {
+    "Abdominal pain": {
+        id: 10,
+    },
+    "Anxiety": {
+        id: 238,
+    },
+    "Back pain": {
+        id: 104,
+    }
+}
+
+/* {
     "ID": 10,
     "Name": "Abdominal pain"
   },
@@ -249,4 +261,4 @@ module.exports= {
   {
     "ID": 30,
     "Name": "Wheezing"
-  }
+  }*/

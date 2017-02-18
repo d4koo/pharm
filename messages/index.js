@@ -88,10 +88,12 @@ bot.dialog('/', [
     session.sendTyping();
     var symptoms = results.response.split();
     var idSymptoms = [];
+
     for(var i = 0; i <symptoms.length; i++){
       for(var j = 0; j <Symp.length; j++){
-        if(Symp[j].Name == symptoms[i])
-          idSymptoms.push(Symp[j].ID);
+        session.send(Symp[j]);
+        if(Symp[j] == symptoms[i])
+          idSymptoms.push(Symp[j].id);
       }
     }
 
