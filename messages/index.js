@@ -79,7 +79,7 @@ bot.dialog('/', [
       }
   },
   function(session, results){
-    session.send('Hello %s!');
+    session.send('Hello %s!', session.userData.name);
     builder.Prompts.choice(session, Dialog.entryMessage, ["Good", "Sick"]);
   },
   function(session, results){
@@ -123,7 +123,6 @@ bot.dialog('/profile', [
     },
     function (session, results) {
         session.userData.name = results.response;
-        builder.Prompts.text()
         session.endDialog();
     }
 ]);

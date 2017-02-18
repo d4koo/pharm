@@ -1,5 +1,5 @@
 module.exports={
-  entryMessage: "Hi there, how are you feeling?",
+  entryMessage: "How are you feeling?",
   notSick: "Cool, have a great day! If you feel sick, you can message me at anytime",
   askSymptoms: "What types of symptoms are you experiencing?",
   guessDiagnosis: "Based on your symptoms, I think you may experiencing the following: ",
