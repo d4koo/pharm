@@ -1,14 +1,29 @@
-module.exports= {
-    "Abdominal pain": {
-        id: 10,
-    },
-    "Anxiety": {
-        id: 238,
-    },
-    "Back pain": {
-        id: 104,
-    }
-}
+module.exports = [
+  {
+    name: "Anxiety",
+    id: 238
+  },
+  {
+    name: "Back pain",
+    id: 104
+  },
+  {
+    name: "Abdominal Pain",
+    id:10
+  }
+];
+
+// module.exports= {
+//     "Abdominal pain": {
+//         id: 10,
+//     },
+//     "Anxiety": {
+//         id: 238,
+//     },
+//     "Back pain": {
+//         id: 104,
+//     }
+// }
 
 /* {
     "ID": 10,

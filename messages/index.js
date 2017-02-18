@@ -86,19 +86,20 @@ bot.dialog('/', [
   },
   function(session, results){
     session.sendTyping();
-    var symptoms = results.response.split();
+    var symptoms = results.response.split(",");
     var idSymptoms = [];
 
     for(var i = 0; i <symptoms.length; i++){
-      for(var j = 0; j <Symp.length; j++){
-        session.send(Symp[j]);
-        if(Symp[j] == symptoms[i])
+      for(var j = 0; j<Symp.length; j++){
+        if(Symp[j].name = symptoms[i])
           idSymptoms.push(Symp[j].id);
       }
     }
 
+
+
     session.send("Got it, so you're experiencing " +idSymptoms+".");
-    session.send(Dialog.guessDiagnosis + "GET DIAGNOSIS");
+    session.send(Dialog.guessDiagnosis + symptoms);
     builder.Prompts.choice(session, Dialog.bestMeds + Dialog.medsList, ["Yes please!", "No thanks!"]);
   },
   function(session,results){
