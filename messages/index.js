@@ -227,7 +227,6 @@ bot.dialog('/none', [
                 ])
                 .tap(builder.CardAction.openUrl(session, url))
         ]);
-    session.endDialog(msg);
     session.send(Dialog.endMessage);
   }
 ]);
