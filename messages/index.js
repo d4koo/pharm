@@ -271,9 +271,9 @@ bot.dialog('/cards', [
                     //.subtitle(diag)
                     .text(subtext)
                     .images([
-                        builder.CardImage.create(session, "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Seattlenighttimequeenanne.jpg/320px-Seattlenighttimequeenanne.jpg")
+                        builder.CardImage.create(session, "https://goo.gl/pBQLeH")
                     ])
-                    .tap(builder.CardAction.openUrl(session, "https://en.wikipedia.org/wiki/Space_Needle"))
+                    .tap(builder.CardAction.openUrl(session, "https://en.wikipedia.org/wiki/" + diag))
             ]);
         session.endDialog(msg);
     }
