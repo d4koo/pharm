@@ -77,7 +77,7 @@ bot.dialog('/none', [
       builder.Prompts.text(session, Dialog.askSymptoms);
     }
   },
-  function(session, results){
+  function(session, results, next){
     session.sendTyping();
     var symptoms = results.response.toLowerCase().split(",");
     var idSymptoms = [];
@@ -165,6 +165,7 @@ bot.dialog('/none', [
     session.send(Dialog.guessDiagnosis + diag);
     session.beginDialog('/cards');
     builder.Prompts.choice(session, Dialog.bestMeds + medList, ["Yes please!", "No thanks!"]);
+    next();
   },
   function(session,results){
     if(results.response.entity == "Yes please!"){
