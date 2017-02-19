@@ -44,6 +44,9 @@ const LuisModelUrl = 'https://' + luisAPIHostName + '/luis/v1/application?id=' +
 // Main dialog with LUIS
 var recognizer = new builder.LuisRecognizer(LuisModelUrl);
 var intents = new builder.IntentDialog({ recognizers: [recognizer] })
+
+    var diag = "Cancer!";
+    var subtext = "Cancer is a group of diseases involving abnormal cell growth with the potential to invade or..."
 /*
 .matches('<yourIntent>')... See details at http://docs.botframework.com/builder/node/guides/understanding-natural-language/
 */
@@ -88,8 +91,6 @@ bot.dialog('/none', [
     }
     var fOne = idSymptoms[0];
     var fTwo = idSymptoms[1];
-    var diag = "Cancer!";
-    var subtext = "Cancer is a group of diseases involving abnormal cell growth with the potential to invade or..."
     var medList = "Tylenol, Advil, or see a doctor!"
 
     if(((fOne == 238 || fTwo == 238) && (fOne == 9 || fTwo == 9)) || ((fOne == 238 || fTwo == 238) && (fOne == 54 || fTwo == 54))){
