@@ -45,7 +45,7 @@ const LuisModelUrl = 'https://' + luisAPIHostName + '/luis/v1/application?id=' +
 var recognizer = new builder.LuisRecognizer(LuisModelUrl);
 var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 
-var diag = "Cancer!";
+var diag = "Cancer";
 var subtext = "Cancer is a group of diseases involving abnormal cell growth with the potential to invade or..."
 var address ="";
 var url ="";
@@ -168,6 +168,7 @@ bot.dialog('/none', [
     url = "https://goo.gl/pBQLeH";
     session.beginDialog('/cards');
     builder.Prompts.choice(session, Dialog.bestMeds + medList + Dialog.seeDoctor, ["Yes please!", "No thanks!"]);
+    next();
   },
   function(session,results){
     if(results.response.entity == "Yes please!"){
