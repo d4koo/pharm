@@ -13,7 +13,7 @@ var botbuilder_azure = require("botbuilder-azure");
 
 
 //Google Custom Search API variables
-var google = require('../../lib/googleapis.js');
+var google = require('googleapis');
 var customsearch = google.customsearch('v1');
 
 // You can get a custom search engine id at
