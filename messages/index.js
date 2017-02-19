@@ -171,6 +171,8 @@ bot.dialog('/none', [
     session.send(Dialog.guessDiagnosis + diag);
     imageurl = "https://goo.gl/pBQLeH";
     url = "https://en.wikipedia.org/wiki/" + diag;
+
+
     //session.beginDialog('/cards');
     session.send("testing");
     builder.Prompts.choice(session, Dialog.bestMeds + medList + Dialog.seeDoctor, ["Yes please!", "No thanks!"]);
@@ -284,7 +286,6 @@ bot.dialog('/cards', [
 
 bot.dialog('/picture', [
     function (session) {
-        session.send("You can easily send pictures to a user...");
         var msg = new builder.Message(session)
             .attachments([{
                 contentType: "image/jpeg",
@@ -296,7 +297,7 @@ bot.dialog('/picture', [
 
 bot.dialog('/report', [
   function (session) {
-      imageurl = "http://i64.tinypic.com/v87m8.jpg";
+      imageurl = "http://i67.tinypic.com/2ebqoue.jpg";
       session.beginDialog('/picture');
       session.endDialog();
   }
