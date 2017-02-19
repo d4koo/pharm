@@ -78,8 +78,8 @@ bot.dialog('/none', [
     }
     var fOne = idSymptoms[0];
     var fTwo = idSymptoms[1];
-    var diag = "Not sure!";
-    var medList = "Tylenol, Advil, or see a doctor!"
+    var diag = "Cancer!";
+    var medList = "Tylenol, Advil, or see a doctor! But realistically you're screwed.."
 
     if(((fOne == 238 || fTwo == 238) && (fOne == 9 || fTwo == 9)) || ((fOne == 238 || fTwo == 238) && (fOne == 54 || fTwo == 54))){
       diag = "depression";
@@ -224,7 +224,7 @@ bot.dialog('/profile', [
     }
 ]);
 
-intents.onDefault(builder.DialogAction.send("I'm sorry. I didn't understand."));
+intents.onDefault(builder.DialogAction.send("I'm sorry. I didn't understand. You probably have cancer.."));
 
 /*
 bot.dialog('/', [
