@@ -48,7 +48,9 @@ var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 var diag = "Cancer";
 var subtext = "Cancer is a group of diseases involving abnormal cell growth with the potential to invade or..."
 var address ="";
+var imageurl ="";
 var url ="";
+var cardcheck = 1;
 /*
 .matches('<yourIntent>')... See details at http://docs.botframework.com/builder/node/guides/understanding-natural-language/
 */
@@ -165,7 +167,8 @@ bot.dialog('/none', [
 
     session.send("Got it, so you're experiencing " +symptoms+".");
     session.send(Dialog.guessDiagnosis + diag);
-    url = "https://goo.gl/pBQLeH";
+    imageurl = "https://goo.gl/pBQLeH";
+    url = "https://en.wikipedia.org/wiki/" + diag;
     //session.beginDialog('/cards');
     builder.Prompts.choice(session, Dialog.bestMeds + medList + Dialog.seeDoctor, ["Yes please!", "No thanks!"]);
   },
@@ -179,6 +182,7 @@ bot.dialog('/none', [
   
   function(session, results){
     address = results.response.replace(/ /g, "+");
+    imageurl = "https://goo.gl/aoWyEz";
     url = "https://www.google.com/search?q=pharmacies+near+" + address;
     diag = "Nearby Pharmacies";
     subtext = address;
@@ -264,9 +268,9 @@ bot.dialog('/cards', [
                     //.subtitle(diag)
                     .text(subtext)
                     .images([
-                        builder.CardImage.create(session, url)
+                        builder.CardImage.create(session, imageurl)
                     ])
-                    .tap(builder.CardAction.openUrl(session, "https://en.wikipedia.org/wiki/" + diag))
+                    .tap(builder.CardAction.openUrl(session, url))
             ]);
         session.endDialog(msg);
         session.endDialog();
