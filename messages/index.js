@@ -13,8 +13,6 @@ var botbuilder_azure = require("botbuilder-azure");
 
 var useEmulator = (process.env.NODE_ENV == 'development');
 
-var API_KEY = "AIzaSyDNEXmxnsK3Ry7Rpc3RH_AKftt1beWWuSg";
-
 var connector = useEmulator ? new builder.ChatConnector() : new botbuilder_azure.BotServiceConnector({
     appId: process.env['MicrosoftAppId'],
     appPassword: process.env['MicrosoftAppPassword'],
@@ -79,7 +77,8 @@ bot.dialog('/none', [
     var fOne = idSymptoms[0];
     var fTwo = idSymptoms[1];
     var diag = "Cancer!";
-    var medList = "Tylenol, Advil, or see a doctor! But realistically you're screwed.."
+    var subtext = "Cancer is a group of diseases involving abnormal cell growth with the potential to invade or..."
+    var medList = "Tylenol, Advil, or see a doctor!"
 
     if(((fOne == 238 || fTwo == 238) && (fOne == 9 || fTwo == 9)) || ((fOne == 238 || fTwo == 238) && (fOne == 54 || fTwo == 54))){
       diag = "depression";
@@ -227,12 +226,33 @@ bot.dialog('/profile', [
 
 bot.dialog('/cards', [
     function (session) {
+      'use strict';
+
+var google = require('../../lib/googleapis.js');
+var customsearch = google.customsearch('v1');
+
+// You can get a custom search engine id at
+// https://www.google.com/cse/create/new
+const CX = '005678558225547190025:eudrns_0izc';
+const API_KEY = 'AIzaSyDj2ur2XxxCgagiTKSh7bKVCgKXyJ9_hU0';
+const SEARCH = 'testing';
+
+customsearch.cse.list({ cx: CX, q: SEARCH, auth: API_KEY }, function (err, resp) {
+  if (err) {
+    return console.log('An error occured', err);
+  }
+  // Got the response from custom search
+  console.log('Result: ' + resp.searchInformation.formattedTotalResults);
+  if (resp.items && resp.items.length > 0) {
+    console.log('First result name is ' + resp.items[0].title);
+  }
+});
         var msg = new builder.Message(session)
             .textFormat(builder.TextFormat.xml)
             .attachments([
                 new builder.HeroCard(session)
                     .title("Hero Card")
-                    .subtitle("Space Needle")
+                    .subtitle(diag)
                     .text("The <b>Space Needle</b> is an observation tower in Seattle, Washington, a landmark of the Pacific Northwest, and an icon of Seattle.")
                     .images([
                         builder.CardImage.create(session, "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Seattlenighttimequeenanne.jpg/320px-Seattlenighttimequeenanne.jpg")
