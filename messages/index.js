@@ -79,7 +79,7 @@ bot.dialog('/none', [
       builder.Prompts.text(session, Dialog.askSymptoms);
     }
   },
-  function(session, results, next){
+  function(session, results){
     session.sendTyping();
     var symptoms = results.response.toLowerCase().split(",");
     var idSymptoms = [];
@@ -168,7 +168,6 @@ bot.dialog('/none', [
     url = "https://goo.gl/pBQLeH";
     session.beginDialog('/cards');
     builder.Prompts.choice(session, Dialog.bestMeds + medList + Dialog.seeDoctor, ["Yes please!", "No thanks!"]);
-    next();
   },
   function(session,results){
     if(results.response.entity == "Yes please!"){
