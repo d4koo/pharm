@@ -170,7 +170,7 @@ bot.dialog('/none', [
     session.send(Dialog.guessDiagnosis + diag);
     imageurl = "https://goo.gl/pBQLeH";
     url = "https://en.wikipedia.org/wiki/" + diag;
-    session.beginDialog('/cards');
+    //session.beginDialog('/cards');
     session.send("testing");
     builder.Prompts.choice(session, Dialog.bestMeds + medList + Dialog.seeDoctor, ["Yes please!", "No thanks!"]);
   },
@@ -228,6 +228,8 @@ bot.dialog('/none', [
       //   }
     //session.send(Dialog.findPharms + url);
     session.send(Dialog.endMessage);
+    imageurl = "http://i67.tinypic.com/2ebqoue.jpg";
+    session.beginDialog('/picture');
   }
 ]);
 
@@ -276,6 +278,18 @@ bot.dialog('/cards', [
             ]);
         session.endDialog(msg);
         session.endDialog();
+    }
+]);
+
+bot.dialog('/picture', [
+    function (session) {
+        session.send("You can easily send pictures to a user...");
+        var msg = new builder.Message(session)
+            .attachments([{
+                contentType: "image/jpeg",
+                contentUrl: imageurl
+            }]);
+        session.endDialog(msg);
     }
 ]);
 
