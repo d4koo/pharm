@@ -166,7 +166,7 @@ bot.dialog('/none', [
     session.send("Got it, so you're experiencing " +symptoms+".");
     session.send(Dialog.guessDiagnosis + diag);
     url = "https://goo.gl/pBQLeH";
-    session.beginDialog('/cards');
+    //session.beginDialog('/cards');
     builder.Prompts.choice(session, Dialog.bestMeds + medList + Dialog.seeDoctor, ["Yes please!", "No thanks!"]);
   },
   function(session,results){
