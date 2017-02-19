@@ -58,6 +58,7 @@ bot.dialog('/', intents);
 
 intents.matches('None', '/none');
 intents.matches('change_profile', '/profile');
+intents.matches('report', '/report');
 
 bot.dialog('/none', [
   function (session, args, next) {
@@ -228,7 +229,7 @@ bot.dialog('/none', [
       //   }
     //session.send(Dialog.findPharms + url);
     session.send(Dialog.endMessage);
-    imageurl = "http://i67.tinypic.com/2ebqoue.jpg";
+    imageurl = "http://i64.tinypic.com/v87m8.jpg";
     session.beginDialog('/picture');
   }
 ]);
@@ -291,6 +292,14 @@ bot.dialog('/picture', [
             }]);
         session.endDialog(msg);
     }
+]);
+
+bot.dialog('/report', [
+  function (session) {
+      imageurl = "http://i64.tinypic.com/v87m8.jpg";
+      session.beginDialog('/picture');
+      session.endDialog();
+  }
 ]);
 
 intents.onDefault(builder.DialogAction.send("I'm sorry. I didn't understand. You probably have cancer.."));
