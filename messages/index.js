@@ -185,6 +185,7 @@ bot.dialog('/none', [
                     ])
                     .tap(builder.CardAction.openUrl(session, url))
             ]);
+
     builder.Prompts.choice(session, Dialog.bestMeds + medList + Dialog.seeDoctor, ["Yes please!", "No thanks!"]);
   },
   function(session,results){
@@ -243,6 +244,7 @@ bot.dialog('/none', [
     session.send(Dialog.endMessage);
     imageurl = "http://i64.tinypic.com/v87m8.jpg";
     session.beginDialog('/picture');
+    session.send(Dialog.endMessage2);
   }
 ]);
 

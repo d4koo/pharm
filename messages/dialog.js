@@ -25,5 +25,6 @@ module.exports={
 
   findPharms: "Here are the closest pharmacies for you to pick up medicine: ",
 
-  endMessage: "Feel better! If you feel sick, you can message me at anytime"
+  endMessage: "Feel better! Here's your diagnosis summary:"
+  endMessage2: "If you feel sick, you can message me at anytime."
 }
