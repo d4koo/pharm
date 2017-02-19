@@ -268,6 +268,7 @@ bot.dialog('/cards', [
                     ])
                     .tap(builder.CardAction.openUrl(session, "https://en.wikipedia.org/wiki/" + diag))
             ]);
+        session.endDialog(msg);
         session.endDialog();
     }
 ]);
