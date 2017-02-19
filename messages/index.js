@@ -215,18 +215,6 @@ bot.dialog('/none', [
       //     return;
       //   }
     //session.send(Dialog.findPharms + url);
-     var msg = new builder.Message(session)
-        .textFormat(builder.TextFormat.xml)
-        .attachments([
-            new builder.HeroCard(session)
-                .title("Hero Card")
-                .subtitle("Pharmacies Nearby")
-                .text(address)
-                .images([
-                    builder.CardImage.create(session, "https://goo.gl/tLAtal")
-                ])
-                .tap(builder.CardAction.openUrl(session, url))
-        ]);
     session.send(Dialog.endMessage);
   }
 ]);
