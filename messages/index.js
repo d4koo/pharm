@@ -165,7 +165,6 @@ bot.dialog('/none', [
     session.send(Dialog.guessDiagnosis + diag);
     session.beginDialog('/cards');
     builder.Prompts.choice(session, Dialog.bestMeds + medList, ["Yes please!", "No thanks!"]);
-    next();
   },
   function(session,results){
     if(results.response.entity == "Yes please!"){
@@ -216,7 +215,7 @@ bot.dialog('/none', [
       //     return;
       //   }
     //session.send(Dialog.findPharms + url);
-      msg = new builder.Message(session)
+     var msg = new builder.Message(session)
         .textFormat(builder.TextFormat.xml)
         .attachments([
             new builder.HeroCard(session)

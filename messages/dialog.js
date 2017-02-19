@@ -2,7 +2,7 @@ module.exports={
   entryMessage: "How are you feeling?",
   notSick: "Cool, have a great day! If you feel sick, you can message me at anytime",
   askSymptoms: "What types of symptoms are you experiencing?",
-  guessDiagnosis: "Based on your symptoms, I think you may experiencing the following: ",
+  guessDiagnosis: "Based on your symptoms, I think you may be experiencing the following: ",
   bestMeds: "Here's the best medication for this diagnosis: ",
   
   medsDepression: "talk therapy, antidepressants, anxiolytic, and antipsychotic medication",
