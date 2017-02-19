@@ -150,7 +150,7 @@ bot.dialog('/none', [
       medList = Dialog.medsAche;
     }
     else if(idSymptoms.length > 4){
-      diag = "You seem really sick, maybe it's something serious";
+      diag = "You seem really sick, maybe it's something serious. Try ";
       medList = Dialog.medsCancer;
     }
     // Get request using idSymptoms[0] and idSymptoms[1] for diagnosis.
@@ -164,7 +164,7 @@ bot.dialog('/none', [
     session.send("Got it, so you're experiencing " +symptoms+".");
     session.send(Dialog.guessDiagnosis + diag);
     session.beginDialog('/cards');
-    builder.Prompts.choice(session, Dialog.bestMeds + medList, ["Yes please!", "No thanks!"]);
+    builder.Prompts.choice(session, Dialog.bestMeds + medList + Dialog.seeDoctor, ["Yes please!", "No thanks!"]);
   },
   function(session,results){
     if(results.response.entity == "Yes please!"){
