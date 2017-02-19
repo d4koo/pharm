@@ -219,7 +219,7 @@ bot.dialog('/none', [
         .attachments([
             new builder.HeroCard(session)
                 .title("Hero Card")
-                .subtitle(Pharmacies Nearby)
+                .subtitle("Pharmacies Nearby")
                 .text(address)
                 .images([
                     builder.CardImage.create(session, "https://www.google.com/imgres?imgurl=http%3A%2F%2Fwww.dcmh.net%2Fwp-content%2Fuploads%2F6063122.jpg&imgrefurl=https%3A%2F%2Fwww.dcmh.net%2Fservices%2Fclinical%2Fpharmacy-services%2F&docid=t9xGoAwd41MfMM&tbnid=QIdRQyv_DWM2WM%3A&vet=1&w=924&h=519&bih=810&biw=1598&q=pharmacy&ved=0ahUKEwi_orbbwZzSAhVKJMAKHaYgAfMQMwhnKAEwAQ&iact=mrc&uact=8")
