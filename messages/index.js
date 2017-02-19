@@ -99,7 +99,11 @@ bot.dialog('/none', [
     var fTwo = idSymptoms[1];
     var medList = "Tylenol, Advil, or see a doctor!"
 
-    if(((fOne == 238 || fTwo == 238) && (fOne == 9 || fTwo == 9)) || ((fOne == 238 || fTwo == 238) && (fOne == 54 || fTwo == 54))){
+    if ((fOne == 11 || fTwo == 11) && (fOne == 9 || fTwo == 9) && idSymptoms[2] == "body ache"){
+      diag = "food poisoning"
+      medList = Dialog.medsFood;
+    }
+    else if(((fOne == 238 || fTwo == 238) && (fOne == 9 || fTwo == 9)) || ((fOne == 238 || fTwo == 238) && (fOne == 54 || fTwo == 54))){
       diag = "depression";
       medList = Dialog.medsDepression;
     }
@@ -173,6 +177,7 @@ bot.dialog('/none', [
     url = "https://en.wikipedia.org/wiki/" + diag;
     //session.beginDialog('/cards');
 
+<<<<<<< HEAD
             var msg = new builder.Message(session)
             .textFormat(builder.TextFormat.xml)
             .attachments([
@@ -186,6 +191,21 @@ bot.dialog('/none', [
                     .tap(builder.CardAction.openUrl(session, url))
             ]);
 
+=======
+    var msg = new builder.Message(session)
+    .textFormat(builder.TextFormat.xml)
+    .attachments([
+        new builder.HeroCard(session)
+            .title(diag)
+            //.subtitle(diag)
+            .text(subtext)
+            .images([
+                builder.CardImage.create(session, imageurl)
+            ])
+            .tap(builder.CardAction.openUrl(session, url))
+    ]);
+    session.send(msg);
+>>>>>>> 3430887e83c296d458ecec38622af4ee1d28be7f
     builder.Prompts.choice(session, Dialog.bestMeds + medList + Dialog.seeDoctor, ["Yes please!", "No thanks!"]);
   },
   function(session,results){
