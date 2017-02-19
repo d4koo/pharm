@@ -85,6 +85,7 @@ bot.dialog('/none', [
     session.sendTyping();
     var symptoms = results.response.toLowerCase().split(",");
     var idSymptoms = [];
+    diag = "Cancer";
 
     for(var i = 0; i <symptoms.length; i++){
       for(var j = 0; j < Symp.length; j++){
@@ -169,7 +170,7 @@ bot.dialog('/none', [
     session.send(Dialog.guessDiagnosis + diag);
     imageurl = "https://goo.gl/pBQLeH";
     url = "https://en.wikipedia.org/wiki/" + diag;
-    //session.beginDialog('/cards');
+    session.beginDialog('/cards');
     builder.Prompts.choice(session, Dialog.bestMeds + medList + Dialog.seeDoctor, ["Yes please!", "No thanks!"]);
   },
   function(session,results){
