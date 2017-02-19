@@ -45,8 +45,12 @@ const LuisModelUrl = 'https://' + luisAPIHostName + '/luis/v1/application?id=' +
 var recognizer = new builder.LuisRecognizer(LuisModelUrl);
 var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 
-    var diag = "Cancer!";
-    var subtext = "Cancer is a group of diseases involving abnormal cell growth with the potential to invade or..."
+var diag = "Cancer";
+var subtext = "Cancer is a group of diseases involving abnormal cell growth with the potential to invade or..."
+var address ="";
+var imageurl ="";
+var url ="";
+var cardcheck = 1;
 /*
 .matches('<yourIntent>')... See details at http://docs.botframework.com/builder/node/guides/understanding-natural-language/
 */
@@ -54,6 +58,7 @@ bot.dialog('/', intents);
 
 intents.matches('None', '/none');
 intents.matches('change_profile', '/profile');
+intents.matches('report', '/report');
 
 bot.dialog('/none', [
   function (session, args, next) {
@@ -77,10 +82,11 @@ bot.dialog('/none', [
       builder.Prompts.text(session, Dialog.askSymptoms);
     }
   },
-  function(session, results, next){
+  function(session, results){
     session.sendTyping();
     var symptoms = results.response.toLowerCase().split(",");
     var idSymptoms = [];
+    diag = "Cancer";
 
     for(var i = 0; i <symptoms.length; i++){
       for(var j = 0; j < Symp.length; j++){
@@ -93,7 +99,11 @@ bot.dialog('/none', [
     var fTwo = idSymptoms[1];
     var medList = "Tylenol, Advil, or see a doctor!"
 
-    if(((fOne == 238 || fTwo == 238) && (fOne == 9 || fTwo == 9)) || ((fOne == 238 || fTwo == 238) && (fOne == 54 || fTwo == 54))){
+    if ((fOne == 11 || fTwo == 11) && (fOne == 9 || fTwo == 9)){
+      diag = "food poisoning"
+      medList = Dialog.medsFood;
+    }
+    else if(((fOne == 238 || fTwo == 238) && (fOne == 9 || fTwo == 9)) || ((fOne == 238 || fTwo == 238) && (fOne == 54 || fTwo == 54))){
       diag = "depression";
       medList = Dialog.medsDepression;
     }
@@ -150,7 +160,7 @@ bot.dialog('/none', [
       medList = Dialog.medsAche;
     }
     else if(idSymptoms.length > 4){
-      diag = "You seem really sick, maybe it's something serious";
+      diag = "You seem really sick, maybe it's something serious. Try ";
       medList = Dialog.medsCancer;
     }
     // Get request using idSymptoms[0] and idSymptoms[1] for diagnosis.
@@ -163,8 +173,24 @@ bot.dialog('/none', [
 
     session.send("Got it, so you're experiencing " +symptoms+".");
     session.send(Dialog.guessDiagnosis + diag);
-    session.beginDialog('/cards');
-    builder.Prompts.choice(session, Dialog.bestMeds + medList, ["Yes please!", "No thanks!"]);
+    imageurl = "https://goo.gl/pBQLeH";
+    url = "https://en.wikipedia.org/wiki/" + diag;
+    //session.beginDialog('/cards');
+
+    var msg = new builder.Message(session)
+    .textFormat(builder.TextFormat.xml)
+    .attachments([
+        new builder.HeroCard(session)
+            .title(diag)
+            //.subtitle(diag)
+            .text(subtext)
+            .images([
+                builder.CardImage.create(session, imageurl)
+            ])
+            .tap(builder.CardAction.openUrl(session, url))
+    ]);
+    session.send(msg);
+    builder.Prompts.choice(session, Dialog.bestMeds + medList + Dialog.seeDoctor, ["Yes please!", "No thanks!"]);
   },
   function(session,results){
     if(results.response.entity == "Yes please!"){
@@ -172,11 +198,18 @@ bot.dialog('/none', [
     }
     else
       session.send(Dialog.endMessage);
+      imageurl = "http://i64.tinypic.com/v87m8.jpg";
+      session.beginDialog('/picture');
+      session.send(Dialog.endMessage2);    
   },
   
   function(session, results){
-    var address = results.response.replace(/ /g, "+");
-    var url = "https://www.google.com/search?q=pharmacies+near+" + address;
+    address = results.response.replace(/ /g, "+");
+    imageurl = "https://goo.gl/aoWyEz";
+    url = "https://www.google.com/search?q=pharmacies+near+" + address;
+    diag = "Nearby Pharmacies";
+    subtext = address;
+    session.beginDialog('/cards');
     // var url = "https://maps.googleapis.com/maps/api/geocode/"
     // var options = {
     //   method: "POST",
@@ -215,19 +248,10 @@ bot.dialog('/none', [
       //     return;
       //   }
     //session.send(Dialog.findPharms + url);
-     var msg = new builder.Message(session)
-        .textFormat(builder.TextFormat.xml)
-        .attachments([
-            new builder.HeroCard(session)
-                .title("Hero Card")
-                .subtitle("Pharmacies Nearby")
-                .text(address)
-                .images([
-                    builder.CardImage.create(session, "https://goo.gl/tLAtal")
-                ])
-                .tap(builder.CardAction.openUrl(session, url))
-        ]);
     session.send(Dialog.endMessage);
+    imageurl = "http://i64.tinypic.com/v87m8.jpg";
+    session.beginDialog('/picture');
+    session.send(Dialog.endMessage2);
   }
 ]);
 
@@ -270,12 +294,33 @@ bot.dialog('/cards', [
                     //.subtitle(diag)
                     .text(subtext)
                     .images([
-                        builder.CardImage.create(session, "https://goo.gl/pBQLeH")
+                        builder.CardImage.create(session, imageurl)
                     ])
-                    .tap(builder.CardAction.openUrl(session, "https://en.wikipedia.org/wiki/" + diag))
+                    .tap(builder.CardAction.openUrl(session, url))
             ]);
         session.endDialog(msg);
+        session.endDialog();
     }
+]);
+
+bot.dialog('/picture', [
+    function (session) {
+        var msg = new builder.Message(session)
+            .attachments([{
+                contentType: "image/jpeg",
+                contentUrl: imageurl
+            }]);
+        session.endDialog(msg);
+    }
+]);
+
+bot.dialog('/report', [
+  function (session) {
+      session.send("Here's your quarterly report");
+      imageurl = "http://i67.tinypic.com/2ebqoue.jpg";
+      session.beginDialog('/picture');
+      session.endDialog();
+  }
 ]);
 
 intents.onDefault(builder.DialogAction.send("I'm sorry. I didn't understand. You probably have cancer.."));
