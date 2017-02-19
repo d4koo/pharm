@@ -198,6 +198,9 @@ bot.dialog('/none', [
     }
     else
       session.send(Dialog.endMessage);
+      imageurl = "http://i64.tinypic.com/v87m8.jpg";
+      session.beginDialog('/picture');
+      session.send(Dialog.endMessage2);    
   },
   
   function(session, results){
