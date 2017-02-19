@@ -99,7 +99,7 @@ bot.dialog('/none', [
     var fTwo = idSymptoms[1];
     var medList = "Tylenol, Advil, or see a doctor!"
 
-    if ((fOne == 11 || fTwo == 11) && (fOne == 9 || fTwo == 9) && idSymptoms[2] == "body ache"){
+    if ((fOne == 11 || fTwo == 11) && (fOne == 9 || fTwo == 9)){
       diag = "food poisoning"
       medList = Dialog.medsFood;
     }
