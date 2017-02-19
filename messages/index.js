@@ -213,7 +213,20 @@ bot.dialog('/none', [
       //     console.log(err, 'error when posting request for near pharmacies');
       //     return;
       //   }
-    session.send(Dialog.findPharms + url);
+    //session.send(Dialog.findPharms + url);
+        var msg = new builder.Message(session)
+        .textFormat(builder.TextFormat.xml)
+        .attachments([
+            new builder.HeroCard(session)
+                .title("Hero Card")
+                .subtitle(Pharmacies Nearby)
+                .text(address)
+                .images([
+                    builder.CardImage.create(session, "https://www.google.com/imgres?imgurl=http%3A%2F%2Fwww.dcmh.net%2Fwp-content%2Fuploads%2F6063122.jpg&imgrefurl=https%3A%2F%2Fwww.dcmh.net%2Fservices%2Fclinical%2Fpharmacy-services%2F&docid=t9xGoAwd41MfMM&tbnid=QIdRQyv_DWM2WM%3A&vet=1&w=924&h=519&bih=810&biw=1598&q=pharmacy&ved=0ahUKEwi_orbbwZzSAhVKJMAKHaYgAfMQMwhnKAEwAQ&iact=mrc&uact=8")
+                ])
+                .tap(builder.CardAction.openUrl(session, url))
+        ]);
+    session.endDialog(msg);
     session.send(Dialog.endMessage);
   }
 ]);
@@ -238,7 +251,7 @@ bot.dialog('/profile', [
 
 bot.dialog('/cards', [
     function (session) {
-        customsearch.cse.list({ cx: CX, q: SEARCH, auth: API_KEY }, function (err, resp) {
+        /*customsearch.cse.list({ cx: CX, q: SEARCH, auth: API_KEY }, function (err, resp) {
           if (err) {
             return console.log('An error occured', err);
           }
@@ -247,7 +260,7 @@ bot.dialog('/cards', [
           if (resp.items && resp.items.length > 0) {
             console.log('First result name is ' + resp.items[0].title);
           }
-        });
+        });*/
 
         var msg = new builder.Message(session)
             .textFormat(builder.TextFormat.xml)
