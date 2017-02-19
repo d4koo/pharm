@@ -45,8 +45,10 @@ const LuisModelUrl = 'https://' + luisAPIHostName + '/luis/v1/application?id=' +
 var recognizer = new builder.LuisRecognizer(LuisModelUrl);
 var intents = new builder.IntentDialog({ recognizers: [recognizer] })
 
-    var diag = "Cancer!";
-    var subtext = "Cancer is a group of diseases involving abnormal cell growth with the potential to invade or..."
+var diag = "Cancer!";
+var subtext = "Cancer is a group of diseases involving abnormal cell growth with the potential to invade or..."
+var address ="";
+var url ="";
 /*
 .matches('<yourIntent>')... See details at http://docs.botframework.com/builder/node/guides/understanding-natural-language/
 */
@@ -163,6 +165,7 @@ bot.dialog('/none', [
 
     session.send("Got it, so you're experiencing " +symptoms+".");
     session.send(Dialog.guessDiagnosis + diag);
+    url = "https://goo.gl/pBQLeH";
     session.beginDialog('/cards');
     builder.Prompts.choice(session, Dialog.bestMeds + medList + Dialog.seeDoctor, ["Yes please!", "No thanks!"]);
   },
@@ -175,8 +178,11 @@ bot.dialog('/none', [
   },
   
   function(session, results){
-    var address = results.response.replace(/ /g, "+");
-    var url = "https://www.google.com/search?q=pharmacies+near+" + address;
+    address = results.response.replace(/ /g, "+");
+    url = "https://www.google.com/search?q=pharmacies+near+" + address;
+    diag = "Nearby Pharmacies";
+    subtext = address;
+    session.beginDialog('/cards');
     // var url = "https://maps.googleapis.com/maps/api/geocode/"
     // var options = {
     //   method: "POST",
@@ -258,7 +264,7 @@ bot.dialog('/cards', [
                     //.subtitle(diag)
                     .text(subtext)
                     .images([
-                        builder.CardImage.create(session, "https://goo.gl/pBQLeH")
+                        builder.CardImage.create(session, url)
                     ])
                     .tap(builder.CardAction.openUrl(session, "https://en.wikipedia.org/wiki/" + diag))
             ]);
