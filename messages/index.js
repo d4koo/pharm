@@ -297,6 +297,7 @@ bot.dialog('/picture', [
 
 bot.dialog('/report', [
   function (session) {
+      session.send("Here's your quarterly report");
       imageurl = "http://i67.tinypic.com/2ebqoue.jpg";
       session.beginDialog('/picture');
       session.endDialog();
