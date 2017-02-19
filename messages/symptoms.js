@@ -1,0 +1,12 @@
+module.exports = [["anxiety",238],["back pain",104],["abodminal pain",10],["cough",15],["headache",9],
+  ["burning eyes", 75],["burning in the throat", 46],["cheek swelling",170],["chest pain",17],["chest tightness",31],
+  ["chills",175],["cold sweats", 139],["dizziness",207],["drooping eyelid", 244],["dry eyes", 273],["earache",87],
+  ["early satiety", 92], ["eye pain", 287], ["eye redness", 33],["fast deepened breathing", 153],["feeling of foreign body in the eye",76],
+  ["fever",11],["going black before the eyes",57],["heartburn",45],["hiccups",122],["hot flushes",149],
+  ["itching eyes",73],["itching in the nose",96],["lip swelling",35],["memory gap",235],["menstruation disorder",112],
+  ["missed period",123],["nausea", 44],["neck pain",136],["nervousness",114],["night cough", 133],["pain in the limbs",12],
+  ["pain on swallowing",203],["palpitations",37],["paralysis",140],["reduced appetite",54],["runny nose",14],
+  ["shortness of breath",29],["skin rash",124],["sleeplessness",52],["sneezing",95],["sore throat",13],
+  ["sputum",64],["stomach burning",179],["stuffy nose",28],["sweating",138],["swollen glands in armpits", 248],
+  ["tears", 211],["tiredness",16],["termor at rest",115],["unconsciouness short",144],["vomiting",101],
+  ["vomiting blood", 181],["weakness",56],["weight gain",23],["wheezing",30]];
