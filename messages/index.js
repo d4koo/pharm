@@ -173,7 +173,7 @@ bot.dialog('/none', [
     url = "https://en.wikipedia.org/wiki/" + diag;
 
 
-    //session.beginDialog('/cards');
+    session.beginDialog('/cards');
     session.send("testing");
     builder.Prompts.choice(session, Dialog.bestMeds + medList + Dialog.seeDoctor, ["Yes please!", "No thanks!"]);
   },
