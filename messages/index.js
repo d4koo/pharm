@@ -171,10 +171,20 @@ bot.dialog('/none', [
     session.send(Dialog.guessDiagnosis + diag);
     imageurl = "https://goo.gl/pBQLeH";
     url = "https://en.wikipedia.org/wiki/" + diag;
+    //session.beginDialog('/cards');
 
-
-    session.beginDialog('/cards');
-    session.send("testing");
+            var msg = new builder.Message(session)
+            .textFormat(builder.TextFormat.xml)
+            .attachments([
+                new builder.HeroCard(session)
+                    .title(diag)
+                    //.subtitle(diag)
+                    .text(subtext)
+                    .images([
+                        builder.CardImage.create(session, imageurl)
+                    ])
+                    .tap(builder.CardAction.openUrl(session, url))
+            ]);
     builder.Prompts.choice(session, Dialog.bestMeds + medList + Dialog.seeDoctor, ["Yes please!", "No thanks!"]);
   },
   function(session,results){
